@@ -34,7 +34,7 @@ ENV GOOGLE_CHROME_DRIVER /usr/bin/chromedriver
 ENV GOOGLE_CHROME_BIN /usr/bin/google-chrome-stable
 
 # install node-js
-RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
+RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
     apt-get install -y nodejs && \
     npm i -g npm
 
@@ -47,6 +47,19 @@ RUN mkdir -p /tmp/ && \
     cp -v rar unrar /usr/bin/ && \
     # clean up
     rm -rf /tmp/rar*
+
+    RUN apt-get -qq update
+RUN apt-get -qq install -y --no-install-recommends gnupg2 pv
+
+#add latest mkvtoolnix
+RUN wget -q -O - https://mkvtoolnix.download/gpg-pub-moritzbunkus.txt | apt-key add - 
+    
+RUN sh -c 'echo "deb https://mkvtoolnix.download/debian/ bookworm main" >> /etc/apt/sources.list.d/bunkus.org.list' && \
+    sh -c 'echo deb http://deb.debian.org/debian bookworm main contrib non-free | tee -a /etc/apt/sources.list' && apt update && apt install -y mkvtoolnix
+
+RUN apt install aria2 -y
+RUN apt-get -qq update
+RUN apt-get install mediainfo -y
 
 # copy the content of the local src directory to the working directory
 COPY . .
