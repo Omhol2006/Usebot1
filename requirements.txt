@@ -1,5 +1,7 @@
-dnspython
+dnspython==2.3.0
 gitpython
-motor
-pyrogram>=2.0.30
+TgCrypto
+motor==3.1.2
+pyrogram
 python-dotenv
+py-tgcalls
