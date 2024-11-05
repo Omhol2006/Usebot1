@@ -6,3 +6,4 @@ pyrogram
 python-dotenv
 py-tgcalls
 aiofiles
+pymongo==4.8.0
