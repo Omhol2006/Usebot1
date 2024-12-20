@@ -219,7 +219,8 @@ def init_repos() -> None:
 
         resolve_depends()
         requirements = grab_requirements()
-        
+        requirements.remove('py-tgcalls==0.9.1')
+        requirements.append('pyrofork')
         if requirements:
             conflicts = grab_conflicts(requirements)
 
