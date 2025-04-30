@@ -39,15 +39,9 @@ RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
     npm i -g npm
 
 # install rar
-RUN apt install aria2 -y
-RUN mkdir -p /tmp/ && \
-    cd /tmp/ && \
-    aria2c -o /tmp/rarlinux.tar.gz http://www.rarlab.com/rar/rarlinux-x64-6.0.0.tar.gz && \
-    tar -xzvf rarlinux.tar.gz && \
-    cd rar && \
-    cp -v rar unrar /usr/bin/ && \
-    # clean up
-    rm -rf /tmp/rar*
+RUN curl -sLO http://archive.ubuntu.com/ubuntu/pool/multiverse/r/rar/rar_7.10-2_amd64.deb && \
+    curl -sLO https://archive.ubuntu.com/ubuntu/pool/multiverse/u/unrar-nonfree/unrar_6.1.5-1ubuntu0.1_amd64.deb && \
+    apt install -y ./*.deb && rm *.deb
 
     RUN apt-get -qq update
 RUN apt-get -qq install -y --no-install-recommends gnupg2 pv
