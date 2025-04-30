@@ -41,7 +41,7 @@ RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
 # install rar
 RUN mkdir -p /tmp/ && \
     cd /tmp/ && \
-    wget -O /tmp/rarlinux.tar.gz http://www.rarlab.com/rar/rarlinux-x64-6.0.0.tar.gz && \
+    aria2c -o /tmp/rarlinux.tar.gz http://www.rarlab.com/rar/rarlinux-x64-6.0.0.tar.gz && \
     tar -xzvf rarlinux.tar.gz && \
     cd rar && \
     cp -v rar unrar /usr/bin/ && \
