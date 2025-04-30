@@ -265,8 +265,7 @@ def install_req() -> None:
 
     size = Requirements.size()
     if size > 0:
-        log(f"Installing Requirements ({size}) ...")
-        Requirements._data.remove("py-tgcalls==0.9.1")
+        log(f"Installing Requirements ({size}) ...") 
         print(Requirements._data)
         code, err = Requirements.install()
         if code:
