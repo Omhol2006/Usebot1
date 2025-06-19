@@ -265,6 +265,10 @@ def install_req() -> None:
 
     size = Requirements.size()
     if size > 0:
+        try: 
+            Requirements._data.remove("pyrogram==2.0.58")
+        except:
+            pass
         log(f"Installing Requirements ({size}) ...") 
         print(Requirements._data)
         code, err = Requirements.install()
