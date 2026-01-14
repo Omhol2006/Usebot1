@@ -48,16 +48,11 @@ RUN apt-get -qq install -y --no-install-recommends gnupg2 pv
 
 #add latest mkvtoolnix
 # add latest mkvtoolnix
+# install mkvtoolnix (native bullseye)
 RUN apt-get update && apt-get install -y \
-    wget \
-    gnupg \
-    ca-certificates \
- && wget -qO /usr/share/keyrings/mkvtoolnix.gpg https://mkvtoolnix.download/gpg-pub-moritzbunkus.txt \
- && echo "deb [signed-by=/usr/share/keyrings/mkvtoolnix.gpg] https://mkvtoolnix.download/debian/ bookworm main" \
-    > /etc/apt/sources.list.d/mkvtoolnix.list \
- && apt-get update \
- && apt-get install -y mkvtoolnix \
- && rm -rf /var/lib/apt/lists/*
+    mkvtoolnix \
+    && rm -rf /var/lib/apt/lists/*
+
 
 
 #--------------------------------------
