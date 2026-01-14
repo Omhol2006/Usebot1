@@ -57,7 +57,8 @@ RUN apt-get update && apt-get install -y \
 
 #--------------------------------------
 
-RUN apt install aria2 -y
+RUN apt-get update && apt-get install -y aria2 \
+    && rm -rf /var/lib/apt/lists/*
 RUN apt-get -qq update
 RUN apt-get install mediainfo -y
 
