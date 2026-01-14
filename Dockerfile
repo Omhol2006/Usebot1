@@ -47,10 +47,18 @@ RUN curl -sLO http://archive.ubuntu.com/ubuntu/pool/multiverse/r/rar/rar_7.10-2_
 RUN apt-get -qq install -y --no-install-recommends gnupg2 pv
 
 #add latest mkvtoolnix
-RUN wget -q -O - https://mkvtoolnix.download/gpg-pub-moritzbunkus.txt | apt-key add - 
-    
-RUN sh -c 'echo "deb https://mkvtoolnix.download/debian/ bookworm main" >> /etc/apt/sources.list.d/bunkus.org.list' && \
-    sh -c 'echo deb http://deb.debian.org/debian bookworm main contrib non-free | tee -a /etc/apt/sources.list' && apt update && apt install -y mkvtoolnix
+RUN apt-get update && apt-get install -y \
+    wget \
+    gnupg \
+    ca-certificates
+RUN wget -qO /usr/share/keyrings/mkvtoolnix.gpg https://mkvtoolnix.download/gpg-pub-moritzbunkus.txt
+
+RUN echo "deb [signed-by=/usr/share/keyrings/mkvtoolnix.gpg] https://mkvtoolnix.download/debian/ bookworm main" \
+    > /etc/apt/sources.list.d/mkvtoolnix.list
+
+RUN apt-get update && apt-get install -y mkvtoolnix
+
+#--------------------------------------
 
 RUN apt install aria2 -y
 RUN apt-get -qq update
